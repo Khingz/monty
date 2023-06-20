@@ -7,14 +7,14 @@ void push(stack_t **stack, unsigned int line_number)
 
 	if (!tokens[1])
 	{
-		fprintf("Not a valid integer\n");
+		fprintf(stderr, "Not a valid integer\n");
 		return;
 	}
 
-	new = malloc(sizeof(stack_t));
+	new_node = malloc(sizeof(stack_t));
 	if (new_node == NULL)
 	{
-		fprintf("fail to malloc\n");
+		fprintf(stderr, "fail to malloc on line %d\n", line_number);
 		return;
 	}
 
@@ -24,7 +24,7 @@ void push(stack_t **stack, unsigned int line_number)
 			continue;
 		if (tokens[1][x] < '0' || tokens[1][x] > '9')
 		{
-			sfprintf("No int passed");
+			fprintf(stderr, "No int passed");
 			return;
 		}
 	}
