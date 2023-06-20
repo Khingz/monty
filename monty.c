@@ -1,5 +1,7 @@
 #include "monty.h"
 
+char **tokens = NULL;
+
 /**
  * main - Entry Point: Interprete monty script
  * @argc: argument count
@@ -9,6 +11,7 @@
 int main(int argc, char **argv)
 {
 	FILE *fd;
+	int exit_value;
 
 	if (argc != 2)
 	{
@@ -21,5 +24,7 @@ int main(int argc, char **argv)
 		fprintf(stderr, "Error: Can't open file %s\n", argv[1]);
 		return (EXIT_FAILURE);
 	}
-	return (execute(fd));
+	exit_value = (execute(fd));
+	fclose(fd);
+	return (exit_value);
 }

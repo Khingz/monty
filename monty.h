@@ -41,7 +41,7 @@ typedef struct instruction_s
 } instruction_t;
 
 /*		MACROS			*/
-
+extern char **tokens;
 
 /*		FUNCTION PROTOTYPES	*/
 int execute(FILE *fd);
