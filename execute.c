@@ -13,6 +13,7 @@ int execute(FILE *fd)
 	int read, token_count = 0;
 	size_t len = 0;
 	char **tokens, *delims = " \n\t\a\b";
+	void (*opcode_f)(stack_t **stack, unsigned int line_number);
 
 	while (1)
 	{
@@ -34,7 +35,13 @@ int execute(FILE *fd)
 			fprintf(stderr, "token error %d\n", line_num);
 			return (EXIT_FAILURE);
 		}
-		printf("%s\n", tokens[1]);
+		opcode_f = get_opcode_func(tokens[0]);
+		if (opcode_f == NULL)
+		{
+			fprintf(stderr, "L<%u>: unknown instruction <%s>\n", line_num, tokens[0]);
+			return (EXIT_FAILURE);
+		}
+		printf("%s, \n", tokens[0]);
 		free(line);
 	}
 	return (EXIT_SUCCESS);
