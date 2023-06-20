@@ -42,6 +42,7 @@ int execute(FILE *fd)
 			return (EXIT_FAILURE);
 		}
 		printf("%s, \n", tokens[0]);
+		free_tokens(tokens);
 		free(line);
 	}
 	return (EXIT_SUCCESS);
