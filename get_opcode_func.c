@@ -14,10 +14,11 @@ void (*get_opcode_func(const char *cmd))(stack_t **stack, unsigned int line_numb
 		{"pint", pint},
 		{"pop", pop},
 		{"swap", swap},
-		{"add" add},
+		{"add", add},
+		{"nop", nop},
 		{NULL, NULL}
 	};
-
+	
 	while (opcodes[i].opcode)
 	{
 		if (strcmp(cmd, opcodes[i].opcode) == 0)
