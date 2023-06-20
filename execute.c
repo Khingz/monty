@@ -47,5 +47,6 @@ int execute(FILE *fd)
 		free(line);
 		free_tokens(tokens, token_count);
 	}
+	free_stack(&stack);
 	return (EXIT_SUCCESS);
 }
