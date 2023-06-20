@@ -1,5 +1,10 @@
 #include "monty.h"
 
+/**
+ * push - add a stack node to the begining of the stack
+ * @stack: A pointer to the top mode node of a stack_t linked list.
+ * @line_number: current line.
+ */
 void push(stack_t **stack, unsigned int line_number)
 {
 	stack_t *temp, *new_node;
@@ -37,6 +42,11 @@ void push(stack_t **stack, unsigned int line_number)
 	(*stack)->next = new_node;
 }
 
+/**
+ * prints - prints a stack dlinked list
+ * @stack: A pointer to the top mode node of a stack_t linked list.
+ * @line_number: current line.
+ */
 void pall(stack_t **stack, unsigned int line_number)
 {
 	stack_t *temp = (*stack)->next;
