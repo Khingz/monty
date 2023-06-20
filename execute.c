@@ -10,7 +10,7 @@ int execute(FILE *fd)
 {
 	char *line = NULL;
 	unsigned int line_num = 0;
-	int read;
+	int read, token_count = 0;
 	size_t len = 0;
 	char **tokens, *delims = " \n\t\a\b";
 
@@ -26,7 +26,15 @@ int execute(FILE *fd)
 				break;
 			return (EXIT_FAILURE);
 		}
-		tokens = tokenize(line, delims);
+		if (line[strlen(line) - 1] == '\n')
+			line[strlen(line) - 1] = '\0';
+		tokens = tokenize(line, delims, &token_count);
+		if (tokens == NULL)
+		{
+			fprintf(stderr, "token error %d\n", line_num);
+			return (EXIT_FAILURE);
+		}
+		printf("%s\n", tokens[1]);
 		free(line);
 	}
 	return (EXIT_SUCCESS);

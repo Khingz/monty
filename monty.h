@@ -7,6 +7,7 @@
 #include <sys/stat.h>
 #include <fcntl.h>
 #include <stdio.h>
+#include <string.h>
 
 /*		STRUCT DEFINITIONS	*/
 /**
@@ -44,6 +45,6 @@ typedef struct instruction_s
 
 /*		FUNCTION PROTOTYPES	*/
 int execute(FILE *fd);
-char **tokenize(char *str, char *delims);
+char **tokenize(char *str, char *delims, int *str_count);
 
 #endif
