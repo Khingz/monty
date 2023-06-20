@@ -77,3 +77,50 @@ void pint(stack_t **stack, unsigned int line_number)
 	(void)line_number;
 	printf("%d\n", (*stack)->next->n);
 }
+
+/**
+ * pop - removes the top element of the stack.
+ * @stack: A pointer to the top mode node of a stack_t linked list.
+ * @line_number: The current working line number of a Monty bytecodes file.
+ */
+void pop(stack_t **stack, unsigned int line_number)
+{
+	stack_t *next = NULL;
+
+	if ((*stack)->next == NULL)
+	{
+		fprintf(stderr, "Pop fuction\n");
+		return;
+	}
+	(void)line_number;
+	next = (*stack)->next->next;
+	free((*stack)->next);
+	if (next)
+		next->prev = *stack;
+	(*stack)->next = next;
+}
+
+/**
+ * swap - swaps top two elements of the stack
+ * @stack: A pointer to the top mode node of a stack_t linked list.
+ * @line_number: The current working line number of a Monty bytecodes file.
+ */
+void swap(stack_t **stack, unsigned int line_number)
+{
+	stack_t *temp;
+
+	if ((*stack)->next == NULL || (*stack)->next->next == NULL)
+	{
+		fprintf(stderr, "Error swap func\n");
+		return;
+	}
+	(void)line_number;
+	temp = (*stack)->next->next;
+	(*stack)->next->next = temp->next;
+	(*stack)->next->prev = temp;
+	if (temp->next)
+		temp->next->prev = (*stack)->next;
+	temp->next = (*stack)->next;
+	temp->prev = *stack;
+	(*stack)->next = temp;
+}

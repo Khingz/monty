@@ -50,6 +50,8 @@ void (*get_opcode_func(const char *cmd))(stack_t **stack, unsigned int line_numb
 void push(stack_t **stack, unsigned int line_number);
 void pall(stack_t **stack, unsigned int line_number);
 void pint(stack_t **stack, unsigned int line_number);
+void pop(stack_t **stack, unsigned int line_number);
+void swap(stack_t **stack, unsigned int line_number);
 int head_node(stack_t **stack);
 void free_stack(stack_t **stack);
 
