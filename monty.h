@@ -49,6 +49,7 @@ char **tokenize(char *str, char *delims, int *str_count);
 void (*get_opcode_func(const char *cmd))(stack_t **stack, unsigned int line_number);
 void push(stack_t **stack, unsigned int line_number);
 void pall(stack_t **stack, unsigned int line_number);
+int head_node(stack_t **stack);
 
 /*			HELPERS		*/
 void free_tokens(char **tokens, int token_count);

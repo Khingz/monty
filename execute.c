@@ -16,6 +16,7 @@ int execute(FILE *fd)
 	void (*opcode_f)(stack_t **stack, unsigned int line_number);
 	stack_t *stack = NULL;
 
+	head_node(&stack);
 	while (1)
 	{
 		line_num++;
