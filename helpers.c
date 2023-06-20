@@ -4,15 +4,16 @@
  * free_tokens - Frees memory allocated for tokenization for each token
  * @tokens: tokens to free
  */
-void free_tokens(char **tokens)
+void free_tokens(char **tokens, int token_count)
 {
-	int x;
+	int i;
 
-	x = 0;
-	while(tokens[x])
+	if (tokens == NULL)
+		return;
+
+	for (i = 0; i < token_count; i++)
 	{
-		free(tokens[x]);
-		x++;
+		free(tokens[i]);
 	}
 	free(tokens);
 }

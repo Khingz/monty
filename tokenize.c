@@ -6,7 +6,9 @@ char **tokenize(char *str, char *delims, int *str_count)
 	char* token = strtok(copy, delims);
 	int i, tokenCount = 0;
 	char **tokens;
-	
+
+	if (str == NULL || delims == NULL || str_count == NULL)
+		return NULL;	
 	while (token)
 	{
 		tokenCount++;

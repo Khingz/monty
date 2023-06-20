@@ -23,7 +23,7 @@ int execute(FILE *fd)
 		if (read == -1)
 		{
 			free(line);
-			if (line && line[0] == 0)
+			if (line || line[0] == 0)
 				break;
 			return (EXIT_FAILURE);
 		}
@@ -41,9 +41,10 @@ int execute(FILE *fd)
 			fprintf(stderr, "L<%u>: unknown instruction <%s>\n", line_num, tokens[0]);
 			return (EXIT_FAILURE);
 		}
-		printf("%s, \n", tokens[0]);
-		free_tokens(tokens);
+		printf("%s\n", tokens[0]);
 		free(line);
+		free_tokens(tokens, token_count);
 	}
+	fclose(fd);
 	return (EXIT_SUCCESS);
 }
