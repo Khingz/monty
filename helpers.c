@@ -1,5 +1,7 @@
 #include "monty.h"
 
+char *get_int(int num);
+
 /**
  * free_tokens - Frees memory allocated for tokenization for each token
  * @tokens: tokens to free
@@ -40,4 +42,68 @@ int empty_line(char *line, char *delims)
 	}
 
 	return (1);
+}
+
+/**
+ * token_error - Sets last element of op_toks to be an error code.
+ * @err_code: Integer to store as a string in op_toks.
+ */
+void token_error(int err_code)
+{
+	int len = 0, i = 0;
+	char *exit_str = NULL;
+	char **new_tokens = NULL;
+
+	len = token_arr_len();
+	new_tokens = malloc(sizeof(char *) * (len + 2));
+	if (!tokens)
+	{
+		fprintf(stderr, "Error: malloc failed\n");
+		return;
+	}
+	while (i < len)
+	{
+		new_tokens[i] = tokens[i];
+		i++;
+	}
+	exit_str = get_int(error_code);
+	if (!exit_str)
+	{
+		free(new_tokens);
+		fprintf(stderr, "Error: malloc failed\n");
+		return;
+	}
+	new_tokens[i++] = exit_str;
+	new_tokens[i] = NULL;
+	free(tokens);
+	tokens = new_tokens;
+}
+
+/**
+ * get_int - gets a character pointer to new string containing int
+ * @num: number to convert to string
+ *
+ * Return: character pointer to newly created string. NULL if malloc fails.
+ */
+char *get_int(int num)
+{
+	unsigned int temp;
+	int length = 0;
+	long num_l = 0;
+	char *ret;
+
+	temp = _abs(num);
+	length = get_numbase_len(temp, 10);
+
+	if (num < 0 || num_l < 0)
+		length++; /* negative sign */
+	ret = malloc(length + 1); /* create new string */
+	if (!ret)
+		return (NULL);
+
+	fill_numbase_buff(temp, 10, ret, length);
+	if (num < 0 || num_l < 0)
+		ret[0] = '-';
+
+	return (ret);
 }

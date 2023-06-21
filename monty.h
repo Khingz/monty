@@ -56,7 +56,14 @@ void add(stack_t **stack, unsigned int line_number);
 void nop(stack_t **stack, unsigned int line_number);
 int head_node(stack_t **stack);
 void free_stack(stack_t **stack);
-
+void token_error(int err_code);
+int malloc_error(void);
+int no_int_error(unsigned int line_number);
+int short_stack_error(unsigned int line_number, char *op);
+int pint_error(unsigned int line_number);
+int pop_error(unsigned int line_number);
+int div_error(unsigned int line_number);
+int pchar_error(unsigned int line_number, char *message);
 
 /*			HELPERS		*/
 void free_tokens(char **tokens, int token_count);
