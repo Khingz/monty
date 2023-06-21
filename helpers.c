@@ -66,7 +66,7 @@ void token_error(int err_code)
 		new_tokens[i] = tokens[i];
 		i++;
 	}
-	exit_str = get_int(error_code);
+	exit_str = get_int(err_code);
 	if (!exit_str)
 	{
 		free(new_tokens);
@@ -92,7 +92,7 @@ char *get_int(int num)
 	long num_l = 0;
 	char *ret;
 
-	temp = _abs(num);
+	temp = abs(num);
 	length = get_numbase_len(temp, 10);
 
 	if (num < 0 || num_l < 0)

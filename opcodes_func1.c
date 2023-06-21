@@ -12,14 +12,14 @@ void push(stack_t **stack, unsigned int line_number)
 
 	if (!tokens[1])
 	{
-		fprintf(stderr, "Not a valid integer\n");
+		token_error(no_int_error(line_number));
 		return;
 	}
 
 	new_node = malloc(sizeof(stack_t));
 	if (new_node == NULL)
 	{
-		fprintf(stderr, "fail to malloc on line %d\n", line_number);
+		token_error(malloc_error());
 		return;
 	}
 
@@ -29,7 +29,7 @@ void push(stack_t **stack, unsigned int line_number)
 			continue;
 		if (tokens[1][x] < '0' || tokens[1][x] > '9')
 		{
-			fprintf(stderr, "No int passed");
+			token_error(no_int_error(line_number));
 			return;
 		}
 	}
@@ -71,10 +71,9 @@ void pint(stack_t **stack, unsigned int line_number)
 {
 	if ((*stack)->next == NULL)
 	{
-		fprintf(stderr, "Pints error\n");
+		token_error(pint_error(line_number));
 		return;
 	}
-	(void)line_number;
 	printf("%d\n", (*stack)->next->n);
 }
 
@@ -89,10 +88,9 @@ void pop(stack_t **stack, unsigned int line_number)
 
 	if ((*stack)->next == NULL)
 	{
-		fprintf(stderr, "Pop fuction\n");
+		token_error(pop_error(line_number));
 		return;
 	}
-	(void)line_number;
 	next = (*stack)->next->next;
 	free((*stack)->next);
 	if (next)
@@ -111,10 +109,9 @@ void swap(stack_t **stack, unsigned int line_number)
 
 	if ((*stack)->next == NULL || (*stack)->next->next == NULL)
 	{
-		fprintf(stderr, "Error swap func\n");
+		token_error(short_stack_error(line_number, tokens[0]));
 		return;
 	}
-	(void)line_number;
 	temp = (*stack)->next->next;
 	(*stack)->next->next = temp->next;
 	(*stack)->next->prev = temp;

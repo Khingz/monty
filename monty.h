@@ -64,6 +64,10 @@ int pint_error(unsigned int line_number);
 int pop_error(unsigned int line_number);
 int div_error(unsigned int line_number);
 int pchar_error(unsigned int line_number, char *message);
+unsigned int token_arr_len(void);
+int get_numbase_len(unsigned int num, unsigned int base);
+void fill_numbase_buff(unsigned int num, unsigned int base,
+		       char *buff, int buff_size);
 
 /*			HELPERS		*/
 void free_tokens(char **tokens, int token_count);
