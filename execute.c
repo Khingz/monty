@@ -25,7 +25,7 @@ int execute(FILE *fd)
 		if (read == -1)
 		{
 			free(line);
-			if (line || line[0] == 0)
+			if (line == NULL)
 				break;
 			return (EXIT_FAILURE);
 		}
@@ -40,6 +40,9 @@ int execute(FILE *fd)
 		opcode_f = get_opcode_func(tokens[0]);
 		if (opcode_f == NULL)
 		{
+			if (line == NULL || line[0] == '\0' || empty_line(line, delims))
+                                continue;
+			free(line);
 			fprintf(stderr, "L<%u>: unknown instruction <%s>\n", line_num, tokens[0]);
 			return (EXIT_FAILURE);
 		}

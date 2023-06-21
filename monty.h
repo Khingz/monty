@@ -60,5 +60,6 @@ void free_stack(stack_t **stack);
 
 /*			HELPERS		*/
 void free_tokens(char **tokens, int token_count);
+int empty_line(char *line, char *delims);
 
 #endif
