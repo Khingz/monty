@@ -9,9 +9,8 @@
 int execute(FILE *fd)
 {
 	char *line = NULL;
-	unsigned int line_num = 0;
-	int token_count = 0;
-	size_t len = 0;
+	unsigned int prev_token_len = 0, line_num = 0;
+	size_t exit_code = EXIT_SUCCESS, len = 0;
 	char *delims = " \n\t\a\b";
 	void (*opcode_f)(stack_t **stack, unsigned int line_number);
 	stack_t *stack = NULL;
@@ -38,18 +37,18 @@ int execute(FILE *fd)
 		if (opcode_f == NULL)
 		{
 			free_stack(&stack);
-			exit_status = unknown_op_error(tokens[0], line_num);
+			exit_code = unknown_op_error(tokens[0], line_num);
 			free_tokens();
 			break;
 		}
-		prev_tok_len = token_arr_len();
+		prev_token_len = token_arr_len();
 		opcode_f(&stack, line_num);
 		if (token_arr_len() != prev_token_len)
 		{
 			if (tokens && tokens[prev_token_len])
-				exit_status = atoi(tokens[prev_token_len]);
+				exit_code = atoi(tokens[prev_token_len]);
 			else
-				exit_status = EXIT_FAILURE;
+				exit_code = EXIT_FAILURE;
 			free_tokens();
 			break;
 		}
@@ -64,5 +63,5 @@ int execute(FILE *fd)
 	}
 
 	free(line);
-	return (exit_status);
+	return (exit_code);
 }
