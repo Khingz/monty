@@ -68,7 +68,7 @@ int unknown_op_error(char *opcode, unsigned int line_number);
 unsigned int token_arr_len(void);
 int get_numbase_len(unsigned int num, unsigned int base);
 void fill_numbase_buff(unsigned int num, unsigned int base,
-		       char *buff, int buff_size);
+		char *buff, int buff_size);
 void add(stack_t **stack, unsigned int line_number);
 void sub(stack_t **stack, unsigned int line_number);
 void divide(stack_t **stack, unsigned int line_number);
@@ -77,6 +77,7 @@ void mod(stack_t **stack, unsigned int line_number);
 void nop(stack_t **stack, unsigned int line_number);
 void pchar(stack_t **stack, unsigned int line_number);
 void pstr(stack_t **stack, unsigned int line_number);
+void rotl(stack_t **stack, unsigned int line_number);
 
 /*			HELPERS		*/
 void free_tokens(void);
