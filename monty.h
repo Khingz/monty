@@ -45,7 +45,7 @@ extern char **tokens;
 
 /*		FUNCTION PROTOTYPES	*/
 int execute(FILE *fd);
-char **tokenize(char *str, char *delims, int *str_count);
+char **tokenize(char *str, char *delims);
 void (*get_opcode_func(const char *cmd))(stack_t **stack, unsigned int line_number);
 void push(stack_t **stack, unsigned int line_number);
 void pall(stack_t **stack, unsigned int line_number);
