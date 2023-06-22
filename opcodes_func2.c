@@ -1,9 +1,9 @@
-#include "monty.h"
+include "monty.h"
 
 /**
- * add - Adds the top two values of a stack_t linked list.
+ * add - add the top two values of a stack_t linked list.
  * @stack: A pointer to the top mode node of a stack_t linked list.
- * @line_number: The current working line number of a Monty bytecod
+ * @line_number: The current working line number of a Monty bytecode
  */
 void add(stack_t **stack, unsigned int line_number)
 {
@@ -19,12 +19,19 @@ void add(stack_t **stack, unsigned int line_number)
 }
 
 /**
- * nop - Ddoes nothing
+ * sub - Subtract top 2 val of a stacl_t linkedlist
  * @stack: A pointer to the top mode node of a stack_t linked list.
- * @line_number: The current working line number of a Monty bytecodes file.
+ * @line_number: The current working line number of a Monty bytecodes file
  */
-void nop(stack_t **stack, unsigned int line_number)
+void sub(stack_t **stack, unsigned int line_number)
 {
-	(void)stack;
-	(void)line_number;
+	if ((*stack)->next == NULL || (*stack)->next->next == NULL)
+	{
+		token_error(short_stack_error(line_number, "sub"));
+		return;
+	}
+
+	(*stack)->next->next->n -= (*stack)->next->n;
+	pop(stack, line_number);
 }
+
