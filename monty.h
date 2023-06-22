@@ -70,7 +70,7 @@ void fill_numbase_buff(unsigned int num, unsigned int base,
 		       char *buff, int buff_size);
 
 /*			HELPERS		*/
-void free_tokens(char **tokens, int token_count);
+void free_tokens(void);
 int empty_line(char *line, char *delims);
 
 #endif

@@ -1,34 +1,48 @@
 #include "monty.h"
 
-char **tokenize(char *str, char *delims, int *str_count)
+char **tokenize(char *str, char *delims)
 {
-	char* copy = strdup(str);
-	char* token = strtok(copy, delims);
-	int i, tokenCount = 0;
-	char **tokens;
+	char **words = NULL;
+	int wc, wordLen, n, i = 0;
 
-	if (str == NULL || delims == NULL || str_count == NULL)
-		return NULL;	
-	while (token)
+	if (str == NULL || !*str)
+		return (NULL);
+	wc = get_word_count(str, delims);
+
+
+	if (wc == 0)
+		return (NULL);
+	words = malloc((wc + 1) * sizeof(char *));
+	if (words == NULL)
+		return (NULL);
+	while (i < wc)
 	{
-		tokenCount++;
-		token = strtok(NULL, delims);
+		wordLen = get_word_length(str, delims);
+		if (is_delim(*str, delims))
+		{
+			str = get_next_word(str, delims);
+		}
+		words[i] = malloc((wordLen + 1) * sizeof(char));
+		if (words[i] == NULL)
+		{
+			while (i >= 0)
+			{
+				i--;
+				free(words[i]);
+			}
+			free(words);
+			return (NULL);
+		}
+		n = 0;
+		while (n < wordLen)
+		{
+			words[i][n] = *(str + n);
+			n++;
+		}
+		words[i][n] = '\0';
+		str = get_next_word(str, delims);
+		i++;
 	}
-	
-	tokens = (char**)malloc(tokenCount * sizeof(char*));
-	if (tokens == NULL)
-	{
-		free(copy);
-		return NULL;
-	}
-	token = strtok((char*)str, delims);
-	for (i = 0; i < tokenCount; i++)
-	{
-		tokens[i] = strdup(token);
-		token += strspn(token, delims);
-		token = strtok(NULL, delims);
-	}
-	*str_count = tokenCount;
-	free(copy);
-	return tokens;
+	words[i] = NULL;
+	return (words);
 }
