@@ -69,6 +69,9 @@ unsigned int token_arr_len(void);
 int get_numbase_len(unsigned int num, unsigned int base);
 void fill_numbase_buff(unsigned int num, unsigned int base,
 		       char *buff, int buff_size);
+void add(stack_t **stack, unsigned int line_number);
+void sub(stack_t **stack, unsigned int line_number);
+void div(stack_t **stack, unsigned int line_number);
 
 /*			HELPERS		*/
 void free_tokens(void);
