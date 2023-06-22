@@ -21,32 +21,48 @@ int execute(FILE *fd)
 	while (getline(&line, &len, fd) != -1)
 	{
 		line_num++;
-		tokens = tokenize(line, delims, &token_count);
+		tokens = tokenize(line, delims);
 		if (tokens == NULL)
 		{
-			fprintf(stderr, "Error: malloc failed\n");
+			if (empty_line(line, delims))
+				continue;
 			free_stack(&stack);
-			return (EXIT_FAILURE);
+			return (malloc_error());
+		}
+		else if (tokens[0][0] == '#')
+		{
+			free_tokens();
+			continue;
 		}
 		opcode_f = get_opcode_func(tokens[0]);
 		if (opcode_f == NULL)
 		{
-			if (empty_line(line, delims))
-                                continue;
 			free_stack(&stack);
-			free_tokens(tokens, token_count);
-			fprintf(stderr, "L%u: unknown instruction %s\n", line_num, tokens[0]);
+			exit_status = unknown_op_error(tokens[0], line_num);
+			free_tokens();
 			break;
 		}
+		prev_tok_len = token_arr_len();
 		opcode_f(&stack, line_num);
-		free_tokens(tokens, token_count);
+		if (token_arr_len() != prev_token_len)
+		{
+			if (tokens && tokens[prev_token_len])
+				exit_status = atoi(tokens[prev_token_len]);
+			else
+				exit_status = EXIT_FAILURE;
+			free_tokens();
+			break;
+		}
+		free_tokens();
 	}
 	free_stack(&stack);
+
 	if (line && *line == 0)
 	{
 		free(line);
-		fprintf(stderr, "Error: malloc failed\n");
-		return (EXIT_FAILURE);
+		return (malloc_error());
 	}
-	return (EXIT_SUCCESS);
+
+	free(line);
+	return (exit_status);
 }

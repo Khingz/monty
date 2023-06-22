@@ -6,17 +6,16 @@ char *get_int(int num);
  * free_tokens - Frees memory allocated for tokenization for each token
  * @tokens: tokens to free
  */
-void free_tokens(char **tokens, int token_count)
+void free_tokens(void)
 {
-	int i;
+	size_t i = 0;
 
 	if (tokens == NULL)
 		return;
 
-	for (i = 0; i < token_count; i++)
-	{
+	for (i = 0; tokens[i]; i++)
 		free(tokens[i]);
-	}
+
 	free(tokens);
 }
 
