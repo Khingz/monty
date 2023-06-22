@@ -1,4 +1,4 @@
-include "monty.h"
+#include "monty.h"
 
 /**
  * add - add the top two values of a stack_t linked list.
@@ -36,11 +36,11 @@ void sub(stack_t **stack, unsigned int line_number)
 }
 
 /**
- * div - handles div of first val
+ * divide - handles div of first val
  * @stack: A pointer to the top mode node of a stack_t linked list.
  * @line_number: The current working line number of a Monty bytecodes file.
  */
-void div(stack_t **stack, unsigned int line_number)
+void divide(stack_t **stack, unsigned int line_number)
 {
 	if ((*stack)->next == NULL || (*stack)->next->next == NULL)
 	{

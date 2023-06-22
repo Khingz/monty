@@ -16,6 +16,10 @@ void (*get_opcode_func(const char *cmd))(stack_t **stack, unsigned int line_numb
 		{"swap", swap},
 		{"add", add},
 		{"nop", nop},
+		{"sub", sub},
+		{"div", divide},
+		{"mul", mul},
+		{"mod", mod},
 		{NULL, NULL}
 	};
 	
