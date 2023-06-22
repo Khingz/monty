@@ -73,3 +73,26 @@ void rotl(stack_t **stack, unsigned int line_number)
 	top->next = NULL;
 	top->prev = butt;
 }
+
+/**
+ * rotr - rotates bottom value of a stack_t linked list to the top.
+ * @stack: A pointer to the top mode node of a stack_t linked list.
+ * @line_number: The current working line number of a Monty bytecodes file.
+ */
+void rotr(stack_t **stack, unsigned int line_number)
+{
+	stack_t *butt, *top;
+
+	if ((*stack)->next == NULL || (*stack)->next->next == NULL)
+		return;
+	(void)line_number;
+	top = (*stack)->next;
+	butt = (*stack)->next;
+	while (butt->next != NULL)
+		butt = butt->next;
+	butt->prev->next = NULL;
+	(*stack)->next = butt;
+	butt->prev = *stack;
+	butt->next = top;
+	top->prev = butt;
+}
