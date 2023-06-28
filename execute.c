@@ -1,5 +1,4 @@
 #include "monty.h"
-#include <stdlib.h>
 
 /**
  * execute - process and execute monty command

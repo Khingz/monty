@@ -42,8 +42,8 @@ typedef struct instruction_s
 
 /*		MACROS			*/
 extern char **tokens;
-#define OPTION_STACK 0
-#define OPTION_QUEUE 1
+#define STACK 0
+#define QUEUE 1
 
 /*		FUNCTION PROTOTYPES	*/
 int execute(FILE *fd);
@@ -87,5 +87,6 @@ void queue(stack_t **stack, unsigned int line_number);
 /*			HELPERS		*/
 void free_tokens(void);
 int empty_line(char *line, char *delims);
+int check_mode(stack_t *stack);
 
 #endif
